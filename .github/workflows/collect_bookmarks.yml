@@ -46,7 +46,7 @@ jobs:
           rm ./git-crypt-key          
       - name: Test Dir structure
         run: |
-          pwd
+          cd personal-vault
           ls
           ls scripts/
           head -2 scripts/secrets.hjson
