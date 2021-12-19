@@ -38,6 +38,8 @@ jobs:
         run: |
           cd personal-vault/scripts/bookmarks-collector
           pwd
+          pip install -r requirements.txt
+          python main.py
           git status
           git remote -v
           git config user.name github-actions
@@ -46,9 +48,9 @@ jobs:
           git add *
           git status
           git commit -m "Github action run id: $GITHUB_RUN_ID, run number: $GITHUB_RUN_NUMBER" || echo "No changes to commit"
-          git log
+          git log --oneline
           git push -u origin master
-          git log
+          git log --oneline
           
 
         
