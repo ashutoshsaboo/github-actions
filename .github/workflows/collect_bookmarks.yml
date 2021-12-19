@@ -42,7 +42,12 @@ jobs:
           git remote -v
           git config user.name github-actions
           git config user.email github-actions@github.com
-          
+          git-crypt lock
+          git add *
+          git status
+          git commit -m "Github action run id: $GITHUB_RUN_ID, run number: $GITHUB_RUN_NUMBER"
+          git log
+          git push -u origin master
           
 
         
