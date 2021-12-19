@@ -45,9 +45,10 @@ jobs:
           git-crypt lock
           git add *
           git status
-          git commit -m "Github action run id: $GITHUB_RUN_ID, run number: $GITHUB_RUN_NUMBER"
+          git commit -m "Github action run id: $GITHUB_RUN_ID, run number: $GITHUB_RUN_NUMBER" || echo "No changes to commit"
           git log
           git push -u origin master
+          git log
           
 
         
