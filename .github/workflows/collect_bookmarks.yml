@@ -1,4 +1,4 @@
-name: Collect Bookmarks, and backup
+name: Collect Bookmarks
 
 on:
   push:
