@@ -1,0 +1,26 @@
+name: Collect Bookmarks, and backup
+
+on:
+  push:
+    branches: [ master ]
+#   schedule:
+#     # * is a special character in YAML so you have to quote this string
+#     - cron:  '0 * * * *'    
+
+concurrency: staging_environment
+
+jobs:
+  collect_bookmarks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Package
+        uses: actions/checkout@v2
+        with:
+          repository: ashutoshsaboo/personal-vault
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+       - name: Test Dir structure
+        run: |
+          ls
+          ls personal-vault/
+
+        
