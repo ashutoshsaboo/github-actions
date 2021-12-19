@@ -1,1 +1,1 @@
-# personal-github-actions
+# github-actions
