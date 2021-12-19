@@ -7,10 +7,11 @@ on:
 #     # * is a special character in YAML so you have to quote this string
 #     - cron:  '0 * * * *'    
 
-concurrency: staging_environment
+concurrency: collect_bookmarks_workflow
 
 jobs:
   collect_bookmarks:
+    concurrency: collect_bookmarks_job
     runs-on: ubuntu-latest
     steps:
       - name: Create Dir structure
@@ -27,29 +28,21 @@ jobs:
           repository: ashutoshsaboo/personal-vault
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: ./personal-vault/
-      - name: Test Dir structure
-        run: |
-          ls
-          ls personal-vault/
-          cd personal-vault/
-          ls scripts/
-          git status
-          pwd
       - name: Unlock git-crypt
         run: |
-          pwd
           cd personal-vault/
-          pwd
-          git status
           echo ${{ secrets.GIT_CRYPT_KEY }} | base64  -d > ./git-crypt-key
           git-crypt unlock ./git-crypt-key
           rm ./git-crypt-key          
-      - name: Test Dir structure
+      - name: Run bookmarks collector script
         run: |
-          cd personal-vault
-          ls
-          ls scripts/
-          head -2 scripts/secrets.hjson
+          cd personal-vault/scripts/bookmarks-collector
+          pwd
+          git status
+          git remote -v
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          
           
 
         
