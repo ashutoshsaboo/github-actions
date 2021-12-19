@@ -18,7 +18,7 @@ jobs:
         with:
           repository: ashutoshsaboo/personal-vault
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-       - name: Test Dir structure
+      - name: Test Dir structure
         run: |
           ls
           ls personal-vault/
