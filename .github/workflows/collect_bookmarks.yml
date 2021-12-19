@@ -13,14 +13,20 @@ jobs:
   collect_bookmarks:
     runs-on: ubuntu-latest
     steps:
+      - name: Create Dir structure
+        run: |
+          mkdir personal-vault  
       - name: Checkout Package
         uses: actions/checkout@v2
         with:
           repository: ashutoshsaboo/personal-vault
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: ./personal-vault/
       - name: Test Dir structure
         run: |
           ls
           ls personal-vault/
+          cd personal-vault/
+          git status
 
         
