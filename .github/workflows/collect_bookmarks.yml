@@ -43,6 +43,7 @@ jobs:
           git add ./cache.pkl
           git status
           git commit -m "Collect_Bookmarks workflow: Github action run id: $GITHUB_RUN_ID, run number: $GITHUB_RUN_NUMBER, github job id: $GITHUB_JOB, github action id: $GITHUB_ACTION" || echo "No changes to commit"
+          git stash
           git-crypt lock
           git push -u origin master
           
