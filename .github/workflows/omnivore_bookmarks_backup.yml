@@ -5,7 +5,7 @@ on:
     branches: [ master ]
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '10/10 * * * *'
+    - cron:  '5/5 * * * *'
 
 concurrency: omnivore_bookmarks_backup
 
@@ -29,6 +29,6 @@ jobs:
           cd scripts/omnivore-bookmarks-backup
           pwd
           pip install -r requirements.txt
-          python main.py          
-
+          python main.py
+          
         
