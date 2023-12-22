@@ -1,0 +1,34 @@
+name: Omnivore Bookmarks Backup
+
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '10/10 * * * *'
+
+concurrency: omnivore_bookmarks_backup
+
+jobs:
+  omnivore_twitter_urls:
+    concurrency: omnivore_bookmarks_backup_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Dir structure
+        run: |
+          mkdir personal-vault  
+      - name: Checkout Package
+        uses: actions/checkout@v2
+        with:
+          repository: ashutoshsaboo/personal-vault
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: ./personal-vault/
+      - name: Run bookmarks collector script
+        run: |
+          cd personal-vault/
+          cd scripts/omnivore-bookmarks-backup
+          pwd
+          pip install -r requirements.txt
+          python main.py          
+
+        
